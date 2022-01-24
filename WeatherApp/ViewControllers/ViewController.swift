@@ -16,6 +16,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         locationManager.requestWhenInUseAuthorization()
+        print("before, \(locationManager.authorizationStatus.rawValue)")
         if(locationManager.authorizationStatus == .authorizedWhenInUse || locationManager.authorizationStatus == .authorizedAlways) {
             guard let currentLoc = locationManager.location else { return }
             
@@ -39,7 +40,9 @@ extension ViewController {
         let otherAction = UIAlertAction(title: "Нет", style: .destructive) { [weak self] _ in
             guard let self = self else { return }
             
-            self.tabBarController?.selectedIndex = 1
+            self.dismiss(animated: true) {
+                self.tabBarController?.selectedIndex = 1
+            }
         }
         
         alert.addAction(okAction)
