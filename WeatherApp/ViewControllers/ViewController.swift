@@ -36,7 +36,11 @@ extension ViewController {
         let alert = UIAlertController(title: "Выбор города", message: "Ваш город \(city)?", preferredStyle: .alert)
         
         let okAction = UIAlertAction(title: "Да", style: .default, handler: nil)
-        let otherAction = UIAlertAction(title: "Нет", style: .destructive, handler: nil)
+        let otherAction = UIAlertAction(title: "Нет", style: .destructive) { [weak self] _ in
+            guard let self = self else { return }
+            
+            self.tabBarController?.selectedIndex = 1
+        }
         
         alert.addAction(okAction)
         alert.addAction(otherAction)
