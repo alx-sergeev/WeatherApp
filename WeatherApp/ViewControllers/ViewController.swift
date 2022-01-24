@@ -9,14 +9,16 @@ import UIKit
 import CoreLocation
 
 class ViewController: UIViewController {
+    // MARK: - Properties
     private var locationManager = CLLocationManager()
     private var currentLoc: CLLocation?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Определяем город пользователя
         locationManager.requestWhenInUseAuthorization()
-        print("before, \(locationManager.authorizationStatus.rawValue)")
+        
         if(locationManager.authorizationStatus == .authorizedWhenInUse || locationManager.authorizationStatus == .authorizedAlways) {
             guard let currentLoc = locationManager.location else { return }
             
