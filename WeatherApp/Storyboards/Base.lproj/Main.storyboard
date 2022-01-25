@@ -155,8 +155,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="citiesSearchTableView" destination="cwK-cn-A1q" id="9bb-Op-q0t"/>
                         <outlet property="searchBar" destination="RwP-Qe-ZXH" id="BAn-1U-sg8"/>
-                        <outlet property="tasksTableView" destination="cwK-cn-A1q" id="5ag-Xl-SZ2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xyg-Sx-dDU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

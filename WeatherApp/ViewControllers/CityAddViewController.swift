@@ -10,9 +10,10 @@ import UIKit
 class CityAddViewController: UIViewController {
     // MARK: - IBOutlets
     @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var tasksTableView: UITableView!
+    @IBOutlet weak var citiesSearchTableView: UITableView!
     
     // MARK: - Properties
+    private let storageManager = StorageManager.shared
     private let citiesData = ["Ульяновск", "Москва", "Казань"]
     private var filteredData: [String]!
     private let citySearchCell = "citySearchCell"
@@ -22,13 +23,33 @@ class CityAddViewController: UIViewController {
         
         
         searchBar.delegate = self
-        tasksTableView.dataSource = self
+        citiesSearchTableView.dataSource = self
+        citiesSearchTableView.delegate = self
         
         filteredData = citiesData
     }
 
     @IBAction func cancelButtonPressed(_ sender: Any) {
         dismiss(animated: true)
+    }
+}
+
+// MARK: - UISearchBarDelegate
+extension CityAddViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filteredData = []
+        
+        if searchText.isEmpty {
+            filteredData = citiesData
+        } else {
+            for city in citiesData {
+                if city.lowercased().contains(searchText.lowercased()) {
+                    filteredData?.append(city)
+                }
+            }
+        }
+        
+        citiesSearchTableView.reloadData()
     }
 }
 
@@ -54,21 +75,13 @@ extension CityAddViewController: UITableViewDataSource {
     }
 }
 
-// MARK: - UISearchBarDelegate
-extension CityAddViewController: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filteredData = []
+extension CityAddViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         
-        if searchText.isEmpty {
-            filteredData = citiesData
-        } else {
-            for city in citiesData {
-                if city.lowercased().contains(searchText.lowercased()) {
-                    filteredData?.append(city)
-                }
-            }
-        }
+        let city = City(name: filteredData[indexPath.row])
+        let _ = storageManager.addCity(city: city)
         
-        tasksTableView.reloadData()
+        dismiss(animated: true)
     }
 }

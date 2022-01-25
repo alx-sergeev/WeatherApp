@@ -24,12 +24,14 @@ class StorageManager {
         return cities
     }
     
-    // Добавить город
+    // Добавить город, если такой ещё не был добавлен
     func addCity(city: City) -> Bool {
-        var cities = getCities()
+        let cities = getCities()
+        let existCity = cities.filter {
+            $0.name == city.name
+        }
         
-        cities.append(city)
-        
+        guard existCity.isEmpty else { return false }
         guard let data = try? JSONEncoder().encode(cities) else { return false }
         
         userDefaults.set(data, forKey: citiesKey)
