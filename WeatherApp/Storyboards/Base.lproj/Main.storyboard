@@ -82,8 +82,30 @@
                     <view key="view" contentMode="scaleToFill" id="Rfk-79-55b">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="A3F-sH-OCE">
+                                <rect key="frame" x="0.0" y="44" width="375" height="574"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cityCell" id="7jt-j6-SBU">
+                                        <rect key="frame" x="0.0" y="44.5" width="375" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7jt-j6-SBU" id="RXb-wm-Sx1">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="xT9-ED-8Vj"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="A3F-sH-OCE" firstAttribute="top" secondItem="xT9-ED-8Vj" secondAttribute="top" id="Muc-LV-NJf"/>
+                            <constraint firstItem="xT9-ED-8Vj" firstAttribute="bottom" secondItem="A3F-sH-OCE" secondAttribute="bottom" id="OEQ-PU-9zm"/>
+                            <constraint firstItem="A3F-sH-OCE" firstAttribute="leading" secondItem="xT9-ED-8Vj" secondAttribute="leading" id="iu4-gO-pfI"/>
+                            <constraint firstItem="xT9-ED-8Vj" firstAttribute="trailing" secondItem="A3F-sH-OCE" secondAttribute="trailing" id="naS-E7-GNJ"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Города" id="wGB-KN-qc9">
                         <barButtonItem key="leftBarButtonItem" systemItem="add" id="EUh-ZU-G53">
@@ -92,10 +114,13 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="citiesTableView" destination="A3F-sH-OCE" id="ZJ4-TX-mqq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j1V-l1-9lN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1751" y="452"/>
+            <point key="canvasLocation" x="1749.5999999999999" y="451.12443778110946"/>
         </scene>
         <!--City Add View Controller-->
         <scene sceneID="2NE-mF-bbg">
