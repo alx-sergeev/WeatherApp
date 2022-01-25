@@ -16,14 +16,56 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="weather_bg" translatesAutoresizingMaskIntoConstraints="NO" id="b1F-hs-uaL">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="oWo-OY-fYZ">
+                                <rect key="frame" x="16" y="72" width="343" height="75.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Город" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bnh-yU-dql">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="29"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Погода" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zgz-sf-UNo">
+                                        <rect key="frame" x="0.0" y="55" width="343" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="Zgz-sf-UNo" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Bnh-yU-dql" secondAttribute="bottom" constant="24" id="HTN-PI-mAT"/>
+                                </constraints>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Температура" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lfN-KS-JeE">
+                                <rect key="frame" x="51" y="306" width="273.5" height="55"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="46"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="oWo-OY-fYZ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="72" id="Apl-rX-fy4"/>
+                            <constraint firstItem="b1F-hs-uaL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="C0B-XO-8VL"/>
+                            <constraint firstItem="oWo-OY-fYZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Ej4-u8-Hsy"/>
+                            <constraint firstItem="b1F-hs-uaL" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="NH8-yY-GxS"/>
+                            <constraint firstItem="lfN-KS-JeE" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Quc-Cu-XIK"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="b1F-hs-uaL" secondAttribute="trailing" id="ftG-QI-djX"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="oWo-OY-fYZ" secondAttribute="trailing" constant="16" id="oon-QD-3td"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="b1F-hs-uaL" secondAttribute="bottom" id="pyL-XW-Sc4"/>
+                            <constraint firstItem="lfN-KS-JeE" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="z3j-aM-njb"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Погода" image="thermometer" catalog="system" id="czF-jl-Ze7"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1025" y="-223"/>
+            <point key="canvasLocation" x="1024.8" y="-223.53823088455775"/>
         </scene>
         <!--Города-->
         <scene sceneID="LKS-7i-Gi2">
@@ -52,6 +94,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <tabBarAppearance key="scrollEdgeAppearance">
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </tabBarAppearance>
                     </tabBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="QSG-bq-IcR"/>
@@ -85,6 +130,7 @@
     <resources>
         <image name="mappin.and.ellipse" catalog="system" width="118" height="128"/>
         <image name="thermometer" catalog="system" width="81" height="128"/>
+        <image name="weather_bg" width="1242" height="2208"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
