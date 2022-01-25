@@ -86,12 +86,63 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" title="Города" id="wGB-KN-qc9">
-                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="EUh-ZU-G53"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="EUh-ZU-G53">
+                            <connections>
+                                <segue destination="XQ9-Ix-m0b" kind="presentation" id="Zgq-bN-aeg"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j1V-l1-9lN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1934.7826086956522" y="452.67857142857139"/>
+            <point key="canvasLocation" x="1751" y="452"/>
+        </scene>
+        <!--City Add View Controller-->
+        <scene sceneID="2NE-mF-bbg">
+            <objects>
+                <viewController id="XQ9-Ix-m0b" customClass="CityAddViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yaX-Yb-JW2">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZaW-6p-Hzd">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="jhA-jL-eEY"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Добавить город" id="C4R-pF-8MU">
+                                        <barButtonItem key="rightBarButtonItem" title="Отмена" id="1sB-1u-19Z">
+                                            <connections>
+                                                <action selector="cancelButtonPressed:" destination="XQ9-Ix-m0b" id="HB6-tx-csF"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="RwP-Qe-ZXH">
+                                <rect key="frame" x="0.0" y="44" width="375" height="51"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Drl-wC-9Q5"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="RwP-Qe-ZXH" firstAttribute="trailing" secondItem="Drl-wC-9Q5" secondAttribute="trailing" id="3cO-Zo-ckZ"/>
+                            <constraint firstItem="ZaW-6p-Hzd" firstAttribute="trailing" secondItem="RwP-Qe-ZXH" secondAttribute="trailing" id="3fL-pX-OVm"/>
+                            <constraint firstItem="RwP-Qe-ZXH" firstAttribute="leading" secondItem="Drl-wC-9Q5" secondAttribute="leading" id="Fys-iM-9Dj"/>
+                            <constraint firstItem="ZaW-6p-Hzd" firstAttribute="leading" secondItem="RwP-Qe-ZXH" secondAttribute="leading" id="IVA-ZP-LOX"/>
+                            <constraint firstItem="RwP-Qe-ZXH" firstAttribute="top" secondItem="ZaW-6p-Hzd" secondAttribute="bottom" id="nGy-Yy-ffu"/>
+                            <constraint firstItem="ZaW-6p-Hzd" firstAttribute="top" secondItem="Drl-wC-9Q5" secondAttribute="top" id="vlc-r4-22i"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="searchBar" destination="RwP-Qe-ZXH" id="BAn-1U-sg8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xyg-Sx-dDU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2478" y="452"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="wex-eI-Xa5">
