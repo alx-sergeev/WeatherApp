@@ -124,20 +124,39 @@
                                 <rect key="frame" x="0.0" y="44" width="375" height="51"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="cwK-cn-A1q">
+                                <rect key="frame" x="0.0" y="95" width="375" height="552"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="citySearchCell" id="Bnr-a2-G1C">
+                                        <rect key="frame" x="0.0" y="44.5" width="375" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Bnr-a2-G1C" id="JfC-fH-MXn">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Drl-wC-9Q5"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="RwP-Qe-ZXH" firstAttribute="trailing" secondItem="Drl-wC-9Q5" secondAttribute="trailing" id="3cO-Zo-ckZ"/>
                             <constraint firstItem="ZaW-6p-Hzd" firstAttribute="trailing" secondItem="RwP-Qe-ZXH" secondAttribute="trailing" id="3fL-pX-OVm"/>
+                            <constraint firstItem="cwK-cn-A1q" firstAttribute="leading" secondItem="Drl-wC-9Q5" secondAttribute="leading" id="8w3-Ob-nss"/>
+                            <constraint firstItem="Drl-wC-9Q5" firstAttribute="bottom" secondItem="cwK-cn-A1q" secondAttribute="bottom" id="CGL-Qd-iij"/>
+                            <constraint firstItem="Drl-wC-9Q5" firstAttribute="trailing" secondItem="cwK-cn-A1q" secondAttribute="trailing" id="FLZ-ve-k5k"/>
                             <constraint firstItem="RwP-Qe-ZXH" firstAttribute="leading" secondItem="Drl-wC-9Q5" secondAttribute="leading" id="Fys-iM-9Dj"/>
                             <constraint firstItem="ZaW-6p-Hzd" firstAttribute="leading" secondItem="RwP-Qe-ZXH" secondAttribute="leading" id="IVA-ZP-LOX"/>
+                            <constraint firstItem="cwK-cn-A1q" firstAttribute="top" secondItem="RwP-Qe-ZXH" secondAttribute="bottom" id="TwW-cL-r50"/>
                             <constraint firstItem="RwP-Qe-ZXH" firstAttribute="top" secondItem="ZaW-6p-Hzd" secondAttribute="bottom" id="nGy-Yy-ffu"/>
                             <constraint firstItem="ZaW-6p-Hzd" firstAttribute="top" secondItem="Drl-wC-9Q5" secondAttribute="top" id="vlc-r4-22i"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="searchBar" destination="RwP-Qe-ZXH" id="BAn-1U-sg8"/>
+                        <outlet property="tasksTableView" destination="cwK-cn-A1q" id="5ag-Xl-SZ2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xyg-Sx-dDU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
