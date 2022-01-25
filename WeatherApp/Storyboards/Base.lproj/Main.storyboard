@@ -110,7 +110,7 @@
                     <navigationItem key="navigationItem" title="Города" id="wGB-KN-qc9">
                         <barButtonItem key="leftBarButtonItem" systemItem="add" id="EUh-ZU-G53">
                             <connections>
-                                <segue destination="XQ9-Ix-m0b" kind="presentation" id="Zgq-bN-aeg"/>
+                                <segue destination="XQ9-Ix-m0b" kind="presentation" identifier="segueToCityAdd" id="Zgq-bN-aeg"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

@@ -17,6 +17,7 @@ class CityAddViewController: UIViewController {
     private let citiesData = ["Ульяновск", "Москва", "Казань"]
     private var filteredData: [String]!
     private let citySearchCell = "citySearchCell"
+    weak var delegateCities: CitiesViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,6 +83,7 @@ extension CityAddViewController: UITableViewDelegate {
         let city = City(name: filteredData[indexPath.row])
         let _ = storageManager.addCity(city: city)
         
+        delegateCities?.updateUI()
         dismiss(animated: true)
     }
 }

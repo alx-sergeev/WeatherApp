@@ -7,12 +7,18 @@
 
 import UIKit
 
+// MARK: - Protocol delegate
+protocol CitiesViewControllerDelegate: AnyObject {
+    func updateUI()
+}
+
 class CitiesViewController: UIViewController {
     // MARK: - IBOutlets
     @IBOutlet weak var citiesTableView: UITableView!
     
     // MARK: - Properties
     private let cityCell = "cityCell"
+    private let segueToCityAdd = "segueToCityAdd"
     private let storageManager = StorageManager.shared
     private lazy var getCities: [City] = storageManager.getCities()
     
@@ -20,6 +26,13 @@ class CitiesViewController: UIViewController {
         super.viewDidLoad()
         
         citiesTableView.dataSource = self
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == segueToCityAdd else { return }
+        guard let cityAddVC = segue.destination as? CityAddViewController else { return }
+        
+        cityAddVC.delegateCities = self
     }
 }
 
@@ -43,5 +56,13 @@ extension CitiesViewController: UITableViewDataSource {
         cell.contentConfiguration = cellConfigurator
         
         return cell
+    }
+}
+
+// MARK: - CitiesViewControllerDelegate
+extension CitiesViewController: CitiesViewControllerDelegate {
+    func updateUI() {
+        getCities = storageManager.getCities()
+        citiesTableView.reloadData()
     }
 }
