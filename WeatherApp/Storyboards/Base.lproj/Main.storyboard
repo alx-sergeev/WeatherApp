@@ -46,6 +46,23 @@
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="5ne-8N-H1e">
                                 <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
                             </activityIndicatorView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="eLE-gh-cPC">
+                                <rect key="frame" x="28" y="300.5" width="319.5" height="66"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Нет города" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sw8-te-5R4">
+                                        <rect key="frame" x="0.0" y="0.0" width="319.5" height="33.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Вы ещё не добавили город в избранное" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rs7-0I-ub1">
+                                        <rect key="frame" x="0.0" y="45.5" width="319.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -54,8 +71,10 @@
                             <constraint firstItem="b1F-hs-uaL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="C0B-XO-8VL"/>
                             <constraint firstItem="oWo-OY-fYZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Ej4-u8-Hsy"/>
                             <constraint firstItem="5ne-8N-H1e" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="HEq-aJ-BCt"/>
+                            <constraint firstItem="eLE-gh-cPC" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Ifa-Hd-hIB"/>
                             <constraint firstItem="b1F-hs-uaL" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="NH8-yY-GxS"/>
                             <constraint firstItem="lfN-KS-JeE" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Quc-Cu-XIK"/>
+                            <constraint firstItem="eLE-gh-cPC" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="aB6-yl-R20"/>
                             <constraint firstItem="5ne-8N-H1e" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="dDW-oo-QZl"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="b1F-hs-uaL" secondAttribute="trailing" id="ftG-QI-djX"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="oWo-OY-fYZ" secondAttribute="trailing" constant="16" id="oon-QD-3td"/>
@@ -67,6 +86,7 @@
                     <connections>
                         <outlet property="activityIndicator" destination="5ne-8N-H1e" id="VeI-5h-JiW"/>
                         <outlet property="cityLabel" destination="Bnh-yU-dql" id="6kt-JS-LLW"/>
+                        <outlet property="noCityTextStack" destination="eLE-gh-cPC" id="nM9-P4-Tnr"/>
                         <outlet property="temperatureLabel" destination="lfN-KS-JeE" id="qx6-ez-bIe"/>
                         <outlet property="weatherLabel" destination="Zgz-sf-UNo" id="s9x-x5-029"/>
                     </connections>
@@ -130,7 +150,7 @@
         <!--City Add View Controller-->
         <scene sceneID="2NE-mF-bbg">
             <objects>
-                <viewController id="XQ9-Ix-m0b" customClass="CityAddViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="cityAddVC" id="XQ9-Ix-m0b" customClass="CityAddViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yaX-Yb-JW2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

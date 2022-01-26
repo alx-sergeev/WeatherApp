@@ -20,7 +20,9 @@ class CitiesViewController: UIViewController {
     private let cityCell = "cityCell"
     private let segueToCityAdd = "segueToCityAdd"
     private let storageManager = StorageManager.shared
-    private lazy var getCities: [City] = storageManager.getCities()
+    private var getCities: [City] {
+        storageManager.getCities()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,6 +81,10 @@ extension CitiesViewController: UITableViewDataSource {
                 
         let _ = storageManager.addCity(city: currentCity, at: destinationIndexPath.row)
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
 }
 
 // MARK: - UITableViewDelegate
@@ -91,7 +97,6 @@ extension CitiesViewController: UITableViewDelegate {
 // MARK: - CitiesViewControllerDelegate
 extension CitiesViewController: CitiesViewControllerDelegate {
     func updateUI() {
-        getCities = storageManager.getCities()
         citiesTableView.reloadData()
     }
 }
