@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F06646927A1933A008C6256 /* String+capitalizingFirstLetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F06646827A1933A008C6256 /* String+capitalizingFirstLetter.swift */; };
 		3F8727D9279EF951007130AF /* CitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8727D8279EF951007130AF /* CitiesViewController.swift */; };
 		3FC7CB84279FB6FA0012B123 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC7CB83279FB6FA0012B123 /* Weather.swift */; };
 		3FC7CB8627A007B20012B123 /* CityAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC7CB8527A007B20012B123 /* CityAddViewController.swift */; };
@@ -25,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		0823A93524B7996F00220275 /* Pods-WeatherApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherApp.debug.xcconfig"; path = "Target Support Files/Pods-WeatherApp/Pods-WeatherApp.debug.xcconfig"; sourceTree = "<group>"; };
+		3F06646827A1933A008C6256 /* String+capitalizingFirstLetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+capitalizingFirstLetter.swift"; sourceTree = "<group>"; };
 		3F8727D8279EF951007130AF /* CitiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesViewController.swift; sourceTree = "<group>"; };
 		3FC7CB83279FB6FA0012B123 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		3FC7CB8527A007B20012B123 /* CityAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityAddViewController.swift; sourceTree = "<group>"; };
@@ -56,6 +58,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3F06646727A192E2008C6256 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3F06646827A1933A008C6256 /* String+capitalizingFirstLetter.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		3FEDC0F0279E935D001828DC = {
 			isa = PBXGroup;
 			children = (
@@ -90,6 +100,7 @@
 		3FEDC111279E955A001828DC /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				3F06646727A192E2008C6256 /* Extensions */,
 				3FFAA186279FA3A100DB04FB /* StorageManager.swift */,
 				3FFAA188279FA84B00DB04FB /* NetworkManager.swift */,
 				3FC7CB83279FB6FA0012B123 /* Weather.swift */,
@@ -276,6 +287,7 @@
 				3FEDC0FD279E935D001828DC /* AppDelegate.swift in Sources */,
 				3FEDC0FF279E935D001828DC /* SceneDelegate.swift in Sources */,
 				3FC7CB84279FB6FA0012B123 /* Weather.swift in Sources */,
+				3F06646927A1933A008C6256 /* String+capitalizingFirstLetter.swift in Sources */,
 				3FC7CB8627A007B20012B123 /* CityAddViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
