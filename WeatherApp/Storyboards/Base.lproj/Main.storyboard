@@ -135,7 +135,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Обновить" id="Ukk-vy-ujP">
                             <connections>
-                                <action selector="updateButtonPressed:" destination="aTy-bt-0rx" id="9aJ-VY-X3n"/>
+                                <action selector="updateButtonPressed:" destination="aTy-bt-0rx" id="U8l-8N-jeV"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

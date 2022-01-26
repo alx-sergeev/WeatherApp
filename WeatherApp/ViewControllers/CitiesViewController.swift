@@ -37,13 +37,16 @@ class CitiesViewController: UIViewController {
         cityAddVC.delegateCities = self
     }
     
-    @IBAction func updateButtonPressed(_ sender: Any) {
+    @IBAction func updateButtonPressed(_ sender: UIBarButtonItem) {
         if !citiesTableView.isEditing {
+            sender.title = "ОК"
             citiesTableView.setEditing(true, animated: true)
         } else {
+            sender.title = "Обновить"
             citiesTableView.setEditing(false, animated: true)
         }
     }
+    
 }
 
 // MARK: - UITableViewDataSource
