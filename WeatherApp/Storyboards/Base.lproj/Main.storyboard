@@ -113,6 +113,11 @@
                                 <segue destination="XQ9-Ix-m0b" kind="presentation" identifier="segueToCityAdd" id="Zgq-bN-aeg"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Обновить" id="Ukk-vy-ujP">
+                            <connections>
+                                <action selector="updateButtonPressed:" destination="aTy-bt-0rx" id="9aJ-VY-X3n"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="citiesTableView" destination="A3F-sH-OCE" id="ZJ4-TX-mqq"/>

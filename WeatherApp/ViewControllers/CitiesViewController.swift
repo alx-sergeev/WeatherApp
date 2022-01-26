@@ -34,6 +34,15 @@ class CitiesViewController: UIViewController {
         
         cityAddVC.delegateCities = self
     }
+    
+    @IBAction func updateButtonPressed(_ sender: Any) {
+        var isEditing = false
+        if !citiesTableView.isEditing {
+            isEditing = true
+        }
+        
+        citiesTableView.setEditing(isEditing, animated: true)
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -56,6 +65,27 @@ extension CitiesViewController: UITableViewDataSource {
         cell.contentConfiguration = cellConfigurator
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let _ = storageManager.deleteCity(at: indexPath.row)
+            
+            updateUI()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        guard let currentCity = storageManager.deleteCity(at: sourceIndexPath.row) else { return }
+                
+        let _ = storageManager.addCity(city: currentCity, at: destinationIndexPath.row)
+    }
+}
+
+// MARK: - UITableViewDelegate
+extension CitiesViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
     }
 }
 
