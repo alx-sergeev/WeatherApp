@@ -19,10 +19,12 @@ class CitiesViewController: UIViewController {
     // MARK: - Properties
     private let cityCell = "cityCell"
     private let segueToCityAdd = "segueToCityAdd"
+    private let unwindSegueFromCityToMain = "fromCityToMain"
     private let storageManager = StorageManager.shared
     private var getCities: [City] {
         storageManager.getCities()
     }
+    var selectCityCell: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,12 +33,22 @@ class CitiesViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == segueToCityAdd else { return }
-        guard let cityAddVC = segue.destination as? CityAddViewController else { return }
-        
-        cityAddVC.delegateCities = self
+        switch segue.identifier {
+        case segueToCityAdd:
+            guard let cityAddVC = segue.destination as? CityAddViewController else { return }
+            
+            cityAddVC.delegateCities = self
+            break
+        case unwindSegueFromCityToMain:
+            guard let mainVC = segue.destination as? ViewController else { return }
+            guard let selectIndexPath = citiesTableView.indexPathForSelectedRow else { return }
+            
+            mainVC.cityIndexPath = selectIndexPath.row
+        default:
+            break
+        }
     }
-    
+
     @IBAction func updateButtonPressed(_ sender: UIBarButtonItem) {
         if !citiesTableView.isEditing {
             sender.title = "ОК"
@@ -66,7 +78,9 @@ extension CitiesViewController: UITableViewDataSource {
         let city = getCities[indexPath.row]
         cellConfigurator.text = city.name
         
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
         cell.contentConfiguration = cellConfigurator
+
         
         return cell
     }

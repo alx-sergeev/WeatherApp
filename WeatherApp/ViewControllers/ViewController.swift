@@ -19,6 +19,7 @@ class ViewController: UIViewController {
     
     
     // MARK: - Properties
+    private let segueFromCityToMain = "fromCityToMain"
     private var locationManager = CLLocationManager()
     private var currentLoc: CLLocation?
     private var currentWeather: CurrentWeather!
@@ -26,6 +27,7 @@ class ViewController: UIViewController {
     private var getCities: [City] {
         storageManager.getCities()
     }
+    var cityIndexPath: Int!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +58,15 @@ class ViewController: UIViewController {
         if !getCities.isEmpty && currentWeather == nil {
             guard let city = getCities.first?.name else { return }
             getCurrentWeather(city: city)
+        }
+    }
+    
+    @IBAction func unwindSegue(_ segue: UIStoryboardSegue) {
+        guard segue.identifier == segueFromCityToMain else { return }
+        guard let _ = segue.source as? CitiesViewController else { return }
+        
+        if cityIndexPath != nil {
+            getCurrentWeather(city: getCities[cityIndexPath].name)
         }
     }
 }
