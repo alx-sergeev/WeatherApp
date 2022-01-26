@@ -30,8 +30,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(getCities)
-        
         // Блок с текстом об отсутсвии городов
         noCityTextStack.isHidden = false
         
@@ -147,7 +145,7 @@ extension ViewController {
         guard let weather = currentWeather else { return }
         
         cityLabel.text = city
-        weatherLabel.text = weather.description
+        weatherLabel.text = weather.description.capitalizingFirstLetter()
         temperatureLabel.text = "\(Int(weather.temp))°"
         
         noCityTextStack.isHidden = true
