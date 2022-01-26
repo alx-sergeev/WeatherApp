@@ -36,12 +36,11 @@ class CitiesViewController: UIViewController {
     }
     
     @IBAction func updateButtonPressed(_ sender: Any) {
-        var isEditing = false
         if !citiesTableView.isEditing {
-            isEditing = true
+            citiesTableView.setEditing(true, animated: true)
+        } else {
+            citiesTableView.setEditing(false, animated: true)
         }
-        
-        citiesTableView.setEditing(isEditing, animated: true)
     }
 }
 
