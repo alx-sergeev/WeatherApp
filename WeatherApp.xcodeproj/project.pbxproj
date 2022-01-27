@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F015F9427A2C9BF00338562 /* WeatherHourCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F015F9327A2C9BF00338562 /* WeatherHourCell.swift */; };
 		3F06646927A1933A008C6256 /* String+capitalizingFirstLetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F06646827A1933A008C6256 /* String+capitalizingFirstLetter.swift */; };
 		3F8727D9279EF951007130AF /* CitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8727D8279EF951007130AF /* CitiesViewController.swift */; };
 		3FC7CB84279FB6FA0012B123 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC7CB83279FB6FA0012B123 /* Weather.swift */; };
@@ -26,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		0823A93524B7996F00220275 /* Pods-WeatherApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherApp.debug.xcconfig"; path = "Target Support Files/Pods-WeatherApp/Pods-WeatherApp.debug.xcconfig"; sourceTree = "<group>"; };
+		3F015F9327A2C9BF00338562 /* WeatherHourCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherHourCell.swift; sourceTree = "<group>"; };
 		3F06646827A1933A008C6256 /* String+capitalizingFirstLetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+capitalizingFirstLetter.swift"; sourceTree = "<group>"; };
 		3F8727D8279EF951007130AF /* CitiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesViewController.swift; sourceTree = "<group>"; };
 		3FC7CB83279FB6FA0012B123 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				3FEDC100279E935D001828DC /* ViewController.swift */,
 				3F8727D8279EF951007130AF /* CitiesViewController.swift */,
 				3FC7CB8527A007B20012B123 /* CityAddViewController.swift */,
+				3F015F9327A2C9BF00338562 /* WeatherHourCell.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				3FC7CB84279FB6FA0012B123 /* Weather.swift in Sources */,
 				3F06646927A1933A008C6256 /* String+capitalizingFirstLetter.swift in Sources */,
 				3FC7CB8627A007B20012B123 /* CityAddViewController.swift in Sources */,
+				3F015F9427A2C9BF00338562 /* WeatherHourCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

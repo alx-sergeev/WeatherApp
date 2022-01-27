@@ -16,6 +16,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var noCityTextStack: UIStackView!
+    @IBOutlet weak var weatherHourLabel: UILabel!
+    @IBOutlet weak var weatherHourCollectionView: UICollectionView!
     
     
     // MARK: - Properties
@@ -28,12 +30,28 @@ class ViewController: UIViewController {
         storageManager.getCities()
     }
     var cityIndexPath: Int!
+    
+    // MARK: - Properties for weatherHourCollectionView
+    private let weatherFooterHourCell = "weatherFooterHourCell"
+    private let weatherHourCell = "weatherHourCell"
+    private let weatherHourVisibleItem: CGFloat = 6
+    private let weatherHourSectionInsets = UIEdgeInsets(top: 20, left: 6, bottom: 20, right: 6)
+    private let weatherHourItemHeight: CGFloat = 100
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // UICollectionView
+        weatherHourCollectionView.dataSource = self
+        weatherHourCollectionView.delegate = self
+        weatherHourCollectionView.showsHorizontalScrollIndicator = false
+        
         // Блок с текстом об отсутсвии городов
         noCityTextStack.isHidden = false
+        
+        // Блок с почасовой погодой
+        weatherHourCollectionView.isHidden = true
+        weatherHourLabel.isHidden = true
         
         // Labels
         cityLabel.isHidden = true
@@ -46,6 +64,14 @@ class ViewController: UIViewController {
 
         // Геолокация
         locationManager.delegate = self
+        
+        // Дата
+//        let date = Date()
+//        let calendar = Calendar.current
+//        let currentHour = calendar.component(.hour, from: date) - 1
+//        let diffHourToDay = (24 - currentHour) / 3
+//        print(currentHour)
+//        print(diffHourToDay)
         
         if getCities.isEmpty {
             locationManager.requestWhenInUseAuthorization()
@@ -122,6 +148,7 @@ extension ViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    // Получение погоды для города по API
     func getCurrentWeather(city: String) {
         guard let currentCity = city.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
         let urlPath = "http://api.openweathermap.org/data/2.5/forecast?q=\(currentCity)&appid=8765be3815e47d66a00ae2f6f9b622d9&lang=ru&units=metric&cnt=1"
@@ -163,5 +190,48 @@ extension ViewController {
         cityLabel.isHidden = false
         weatherLabel.isHidden = false
         temperatureLabel.isHidden = false
+        
+        weatherHourCollectionView.isHidden = false
+        weatherHourLabel.isHidden = false
+    }
+}
+
+// MARK: - UICollectionViewDataSource, UICollectionViewDelegate
+extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 42
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: weatherHourCell, for: indexPath) as! WeatherHourCell
+        
+        return cell
+    }
+}
+
+// MARK: - UICollectionViewDelegateFlowLayout
+extension ViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let paddingWidth = weatherHourSectionInsets.left * (weatherHourVisibleItem + 1)
+        let availableWidth = weatherHourCollectionView.frame.width - paddingWidth
+        let itemWidth = availableWidth / weatherHourVisibleItem
+        
+        return CGSize(width: itemWidth, height: weatherHourItemHeight)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return weatherHourSectionInsets
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return weatherHourSectionInsets.left
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return weatherHourSectionInsets.left
     }
 }
