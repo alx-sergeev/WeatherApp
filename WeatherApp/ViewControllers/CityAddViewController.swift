@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MapKit
 
 class CityAddViewController: UIViewController {
     // MARK: - IBOutlets
@@ -14,20 +15,20 @@ class CityAddViewController: UIViewController {
     
     // MARK: - Properties
     private let storageManager = StorageManager.shared
-    private let citiesData = ["Ульяновск", "Москва", "Казань"]
-    private var filteredData: [String]!
     private let citySearchCell = "citySearchCell"
     weak var delegateCities: CitiesViewControllerDelegate?
+    private let searchCompleter = MKLocalSearchCompleter()
+    private var searchResults = [MKLocalSearchCompletion]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         searchBar.delegate = self
         citiesSearchTableView.dataSource = self
         citiesSearchTableView.delegate = self
         
-        filteredData = citiesData
+        // Maps
+        searchCompleter.delegate = self
     }
 
     @IBAction func cancelButtonPressed(_ sender: Any) {
@@ -35,20 +36,19 @@ class CityAddViewController: UIViewController {
     }
 }
 
+// MARK: - MKLocalSearchCompleterDelegate
+extension CityAddViewController: MKLocalSearchCompleterDelegate {
+    func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
+        searchResults = completer.results
+        
+        citiesSearchTableView.reloadData()
+    }
+}
+
 // MARK: - UISearchBarDelegate
 extension CityAddViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filteredData = []
-        
-        if searchText.isEmpty {
-            filteredData = citiesData
-        } else {
-            for city in citiesData {
-                if city.lowercased().contains(searchText.lowercased()) {
-                    filteredData?.append(city)
-                }
-            }
-        }
+        searchCompleter.queryFragment = searchText
         
         citiesSearchTableView.reloadData()
     }
@@ -61,14 +61,15 @@ extension CityAddViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredData.count
+        return searchResults.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: citySearchCell, for: indexPath)
         var cellConfigurator = cell.defaultContentConfiguration()
         
-        cellConfigurator.text = filteredData[indexPath.row]
+        let searchResult = searchResults[indexPath.row]
+        cellConfigurator.text = searchResult.title
         
         cell.contentConfiguration = cellConfigurator
         
@@ -80,10 +81,10 @@ extension CityAddViewController: UITableViewDataSource {
 extension CityAddViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        let city = City(name: filteredData[indexPath.row])
+
+        let city = City(name: searchResults[indexPath.row].title)
         let _ = storageManager.addCity(city: city)
-        
+
         delegateCities?.updateUI()
         dismiss(animated: true)
     }
