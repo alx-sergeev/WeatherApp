@@ -10,6 +10,7 @@ struct WeatherData: Codable {
 }
 
 struct WeatherItem: Codable {
+    let dt: Double?
     let main: WeatherItemMain?
     let weather: [WeatherItemWeather]?
 }
@@ -20,6 +21,7 @@ struct WeatherItemMain: Codable {
 
 struct WeatherItemWeather: Codable {
     let description: String?
+    let icon: String?
 }
 
 struct CurrentWeather {

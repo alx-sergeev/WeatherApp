@@ -37,6 +37,8 @@ class ViewController: UIViewController {
     private let weatherHourVisibleItem: CGFloat = 6
     private let weatherHourSectionInsets = UIEdgeInsets(top: 20, left: 6, bottom: 20, right: 6)
     private let weatherHourItemHeight: CGFloat = 100
+    private let weatherHourCount = 2 // 1 неделя, каждый день по 8 отрезков времени(каждые 3 часа)
+    private var weatherHourWeathers: [WeatherItem]! = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,19 +67,11 @@ class ViewController: UIViewController {
         // Геолокация
         locationManager.delegate = self
         
-        // Дата
-//        let date = Date()
-//        let calendar = Calendar.current
-//        let currentHour = calendar.component(.hour, from: date) - 1
-//        let diffHourToDay = (24 - currentHour) / 3
-//        print(currentHour)
-//        print(diffHourToDay)
-        
-        if getCities.isEmpty {
-            locationManager.requestWhenInUseAuthorization()
-        } else {
-            getCurrentWeather(city: getCities[0].name)
-        }
+//        if getCities.isEmpty {
+//            locationManager.requestWhenInUseAuthorization()
+//        } else {
+//            getCurrentWeather(city: getCities[0].name)
+//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -151,7 +145,7 @@ extension ViewController {
     // Получение погоды для города по API
     func getCurrentWeather(city: String) {
         guard let currentCity = city.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
-        let urlPath = "http://api.openweathermap.org/data/2.5/forecast?q=\(currentCity)&appid=8765be3815e47d66a00ae2f6f9b622d9&lang=ru&units=metric&cnt=1"
+        let urlPath = "http://api.openweathermap.org/data/2.5/forecast?q=\(currentCity)&appid=8765be3815e47d66a00ae2f6f9b622d9&lang=ru&units=metric&cnt=\(weatherHourCount)"
         
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
@@ -169,6 +163,7 @@ extension ViewController {
                 let currentWeather = CurrentWeather(temp: currentTemp, description: currentDescription)
 
                 self.currentWeather = currentWeather
+                self.weatherHourWeathers = weatherData.list
                 self.updateUICurrentWeather(city: city)
                 
                 self.activityIndicator.stopAnimating()
@@ -178,9 +173,32 @@ extension ViewController {
         }
     }
     
+    // Преобразование даты из формата Unix UTC в формат: 2 фев. и 11:00
+    func getShortDateFromUnix(_ unixUTC: Double) -> (String, String) {
+        let date = Date(timeIntervalSince1970: unixUTC)
+        
+        let dateFormatter = DateFormatter()
+        
+        // Число
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .none
+        dateFormatter.locale = Locale(identifier: "ru_RU")
+        let stringDay = dateFormatter.string(from: date)
+        let resultDay = stringDay.prefix(7).trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        // Время
+        dateFormatter.dateStyle = .none
+        dateFormatter.timeStyle = .short
+        let resultTime = dateFormatter.string(from: date)
+    
+        return (resultDay, resultTime)
+    }
+    
     // Обновление UI информации о текущей погоде
     func updateUICurrentWeather(city: String) {
         guard let weather = currentWeather else { return }
+        
+        weatherHourCollectionView.reloadData()
         
         cityLabel.text = city
         weatherLabel.text = weather.description.capitalizingFirstLetter()
@@ -203,11 +221,14 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 42
+        return weatherHourWeathers.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: weatherHourCell, for: indexPath) as! WeatherHourCell
+        
+        let weather = weatherHourWeathers[indexPath.row]
+        cell.configureCell(weather: weather, dateFormatter: getShortDateFromUnix)
         
         return cell
     }
