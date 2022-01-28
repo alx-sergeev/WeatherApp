@@ -34,10 +34,10 @@ class ViewController: UIViewController {
     // MARK: - Properties for weatherHourCollectionView
     private let weatherFooterHourCell = "weatherFooterHourCell"
     private let weatherHourCell = "weatherHourCell"
-    private let weatherHourVisibleItem: CGFloat = 6
+    private let weatherHourVisibleItem: CGFloat = 5
     private let weatherHourSectionInsets = UIEdgeInsets(top: 20, left: 6, bottom: 20, right: 6)
     private let weatherHourItemHeight: CGFloat = 100
-    private let weatherHourCount = 2 // 1 неделя, каждый день по 8 отрезков времени(каждые 3 часа)
+    private let weatherHourCount = 56 // на 1 неделю вперед, каждый день по 8 отрезков времени(каждые 3 часа)
     private var weatherHourWeathers: [WeatherItem]! = []
 
     override func viewDidLoad() {
@@ -67,11 +67,11 @@ class ViewController: UIViewController {
         // Геолокация
         locationManager.delegate = self
         
-//        if getCities.isEmpty {
-//            locationManager.requestWhenInUseAuthorization()
-//        } else {
-//            getCurrentWeather(city: getCities[0].name)
-//        }
+        if getCities.isEmpty {
+            locationManager.requestWhenInUseAuthorization()
+        } else {
+            getCurrentWeather(city: getCities[0].name)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -173,27 +173,6 @@ extension ViewController {
         }
     }
     
-    // Преобразование даты из формата Unix UTC в формат: 2 фев. и 11:00
-    func getShortDateFromUnix(_ unixUTC: Double) -> (String, String) {
-        let date = Date(timeIntervalSince1970: unixUTC)
-        
-        let dateFormatter = DateFormatter()
-        
-        // Число
-        dateFormatter.dateStyle = .medium
-        dateFormatter.timeStyle = .none
-        dateFormatter.locale = Locale(identifier: "ru_RU")
-        let stringDay = dateFormatter.string(from: date)
-        let resultDay = stringDay.prefix(7).trimmingCharacters(in: .whitespacesAndNewlines)
-        
-        // Время
-        dateFormatter.dateStyle = .none
-        dateFormatter.timeStyle = .short
-        let resultTime = dateFormatter.string(from: date)
-    
-        return (resultDay, resultTime)
-    }
-    
     // Обновление UI информации о текущей погоде
     func updateUICurrentWeather(city: String) {
         guard let weather = currentWeather else { return }
@@ -227,8 +206,8 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: weatherHourCell, for: indexPath) as! WeatherHourCell
         
-        let weather = weatherHourWeathers[indexPath.row]
-        cell.configureCell(weather: weather, dateFormatter: getShortDateFromUnix)
+        let index = indexPath.item
+        cell.configureCell(at: index, weathers: weatherHourWeathers)
         
         return cell
     }

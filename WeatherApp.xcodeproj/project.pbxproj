@@ -13,11 +13,11 @@
 		3FC7CB84279FB6FA0012B123 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC7CB83279FB6FA0012B123 /* Weather.swift */; };
 		3FC7CB8627A007B20012B123 /* CityAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC7CB8527A007B20012B123 /* CityAddViewController.swift */; };
 		3FC7CB8827A00A220012B123 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC7CB8727A00A220012B123 /* City.swift */; };
+		3FE52F1127A3E6260099DCE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FEDC105279E935F001828DC /* Assets.xcassets */; };
 		3FEDC0FD279E935D001828DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEDC0FC279E935D001828DC /* AppDelegate.swift */; };
 		3FEDC0FF279E935D001828DC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEDC0FE279E935D001828DC /* SceneDelegate.swift */; };
 		3FEDC101279E935D001828DC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEDC100279E935D001828DC /* ViewController.swift */; };
 		3FEDC104279E935D001828DC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FEDC102279E935D001828DC /* Main.storyboard */; };
-		3FEDC106279E935F001828DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FEDC105279E935F001828DC /* Assets.xcassets */; };
 		3FEDC109279E935F001828DC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FEDC107279E935F001828DC /* LaunchScreen.storyboard */; };
 		3FFAA187279FA3A100DB04FB /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFAA186279FA3A100DB04FB /* StorageManager.swift */; };
 		3FFAA189279FA84B00DB04FB /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFAA188279FA84B00DB04FB /* NetworkManager.swift */; };
@@ -228,7 +228,7 @@
 			files = (
 				3FFAA18B279FB0D300DB04FB /* .gitignore in Resources */,
 				3FEDC109279E935F001828DC /* LaunchScreen.storyboard in Resources */,
-				3FEDC106279E935F001828DC /* Assets.xcassets in Resources */,
+				3FE52F1127A3E6260099DCE8 /* Assets.xcassets in Resources */,
 				3FEDC104279E935D001828DC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
