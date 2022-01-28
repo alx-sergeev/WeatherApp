@@ -34,6 +34,6 @@ class WeatherHourCell: UICollectionViewCell {
         }
 
         weatherImageView.image = UIImage(named: weatherIcon)
-        temperatureLabel.text = "\(Int(weatherTemp))"
+        temperatureLabel.text = "\(Int(weatherTemp))°"
     }
 }
