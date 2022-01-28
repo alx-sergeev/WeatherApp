@@ -167,8 +167,9 @@ extension ViewController {
                 self.updateUICurrentWeather(city: city)
                 
                 self.activityIndicator.stopAnimating()
-            case .failure(let error):
-                print(error)
+            case .failure(_):
+                self.showAlertErrorWeather()
+                self.activityIndicator.stopAnimating()
             }
         }
     }
@@ -190,6 +191,16 @@ extension ViewController {
         
         weatherHourCollectionView.isHidden = false
         weatherHourLabel.isHidden = false
+    }
+    
+    // Сообщение о неудачной попытке получения данных о погоде
+    func showAlertErrorWeather() {
+        let alert = UIAlertController(title: "Ошибка получения данных", message: "Не удалось получить данные о погоде для данного местоположения", preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "ОК", style: .default, handler: nil)
+        alert.addAction(okAction)
+        
+        present(alert, animated: true, completion: nil)
     }
 }
 
