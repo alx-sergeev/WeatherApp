@@ -7,7 +7,6 @@
 
 import UIKit
 import CoreLocation
-import Alamofire
 
 class ViewController: UIViewController {
     // MARK: - IBOutlets
@@ -21,6 +20,7 @@ class ViewController: UIViewController {
     
     
     // MARK: - Properties
+    private let networkManager = NetworkManager.shared
     private let segueFromCityToMain = "fromCityToMain"
     private var locationManager = CLLocationManager()
     private var currentLoc: CLLocation?
@@ -70,14 +70,32 @@ class ViewController: UIViewController {
         if getCities.isEmpty {
             locationManager.requestWhenInUseAuthorization()
         } else {
-            getCurrentWeather(city: getCities[0].name)
+            networkManager.getCurrentWeather(city: getCities[0].name, cntWeather: weatherHourCount) { [unowned self] currentWeather, weatherHourWeathers in
+                self.currentWeather = currentWeather
+                self.weatherHourWeathers = weatherHourWeathers
+                self.updateUICurrentWeather(city: getCities[0].name)
+            } onError: {
+                self.showAlertErrorWeather()
+            }
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         if !getCities.isEmpty && currentWeather == nil {
             guard let city = getCities.first?.name else { return }
-            getCurrentWeather(city: city)
+            
+            activityIndicator.isHidden = false
+            activityIndicator.startAnimating()
+            
+            networkManager.getCurrentWeather(city: city, cntWeather: weatherHourCount) { [unowned self] (currentWeather, weatherHourWeathers) in
+                self.activityIndicator.stopAnimating()
+                
+                self.currentWeather = currentWeather
+                self.weatherHourWeathers = weatherHourWeathers
+                self.updateUICurrentWeather(city: city)
+            } onError: {
+                self.showAlertErrorWeather()
+            }
         }
     }
     
@@ -86,7 +104,18 @@ class ViewController: UIViewController {
         guard let _ = segue.source as? CitiesViewController else { return }
         
         if cityIndexPath != nil {
-            getCurrentWeather(city: getCities[cityIndexPath].name)
+            activityIndicator.isHidden = false
+            activityIndicator.startAnimating()
+            
+            networkManager.getCurrentWeather(city: getCities[cityIndexPath].name, cntWeather: weatherHourCount) { [unowned self] (currentWeather, weatherHourWeathers) in
+                self.activityIndicator.stopAnimating()
+                
+                self.currentWeather = currentWeather
+                self.weatherHourWeathers = weatherHourWeathers
+                self.updateUICurrentWeather(city: getCities[cityIndexPath].name)
+            } onError: {
+                self.showAlertErrorWeather()
+            }
         }
     }
 }
@@ -126,7 +155,19 @@ extension ViewController {
             guard let self = self else { return }
             
             let _ = self.storageManager.addCity(city: City(name: city), at: 0)
-            self.getCurrentWeather(city: city)
+            
+            self.activityIndicator.isHidden = false
+            self.activityIndicator.startAnimating()
+            
+            self.networkManager.getCurrentWeather(city: city, cntWeather: self.weatherHourCount) { [unowned self] (currentWeather, weatherHourWeathers) in
+                self.activityIndicator.stopAnimating()
+                
+                self.currentWeather = currentWeather
+                self.weatherHourWeathers = weatherHourWeathers
+                self.updateUICurrentWeather(city: city)
+            } onError: {
+                self.showAlertErrorWeather()
+            }
         }
         let otherAction = UIAlertAction(title: "Нет", style: .destructive) { [weak self] _ in
             guard let self = self else { return }
@@ -140,38 +181,6 @@ extension ViewController {
         alert.addAction(otherAction)
         
         present(alert, animated: true, completion: nil)
-    }
-    
-    // Получение погоды для города по API
-    func getCurrentWeather(city: String) {
-        guard let currentCity = city.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
-        let urlPath = "http://api.openweathermap.org/data/2.5/forecast?q=\(currentCity)&appid=8765be3815e47d66a00ae2f6f9b622d9&lang=ru&units=metric&cnt=\(weatherHourCount)"
-        
-        activityIndicator.isHidden = false
-        activityIndicator.startAnimating()
-        
-        AF.request(urlPath, method: .get)
-        .validate()
-        .responseDecodable(of: WeatherData.self) { [weak self] response in
-            guard let self = self else { return }
-
-            switch response.result {
-            case .success(let weatherData):
-                guard let currentTemp = weatherData.list?[0].main?.temp,
-                      let currentDescription = weatherData.list?[0].weather?[0].description else { return }
-
-                let currentWeather = CurrentWeather(temp: currentTemp, description: currentDescription)
-
-                self.currentWeather = currentWeather
-                self.weatherHourWeathers = weatherData.list
-                self.updateUICurrentWeather(city: city)
-                
-                self.activityIndicator.stopAnimating()
-            case .failure(_):
-                self.showAlertErrorWeather()
-                self.activityIndicator.stopAnimating()
-            }
-        }
     }
     
     // Обновление UI информации о текущей погоде
