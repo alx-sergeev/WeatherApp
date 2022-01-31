@@ -21,7 +21,6 @@
 		3FEDC109279E935F001828DC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FEDC107279E935F001828DC /* LaunchScreen.storyboard */; };
 		3FFAA187279FA3A100DB04FB /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFAA186279FA3A100DB04FB /* StorageManager.swift */; };
 		3FFAA189279FA84B00DB04FB /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFAA188279FA84B00DB04FB /* NetworkManager.swift */; };
-		3FFAA18B279FB0D300DB04FB /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 3FFAA18A279FB0D300DB04FB /* .gitignore */; };
 		88D6869554A8030D1560013E /* Pods_WeatherApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8601A4BC1DB466F5A5C1E456 /* Pods_WeatherApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,7 +42,6 @@
 		3FEDC10A279E935F001828DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3FFAA186279FA3A100DB04FB /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		3FFAA188279FA84B00DB04FB /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		3FFAA18A279FB0D300DB04FB /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		8601A4BC1DB466F5A5C1E456 /* Pods_WeatherApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeatherApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE905F0DAC26DF45DE299D6A /* Pods-WeatherApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherApp.release.xcconfig"; path = "Target Support Files/Pods-WeatherApp/Pods-WeatherApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -94,7 +92,6 @@
 				3FEDC113279E95AB001828DC /* Storyboards */,
 				3FEDC112279E9599001828DC /* ViewControllers */,
 				3FEDC111279E955A001828DC /* Models */,
-				3FFAA18A279FB0D300DB04FB /* .gitignore */,
 			);
 			path = WeatherApp;
 			sourceTree = "<group>";
@@ -226,7 +223,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3FFAA18B279FB0D300DB04FB /* .gitignore in Resources */,
 				3FEDC109279E935F001828DC /* LaunchScreen.storyboard in Resources */,
 				3FE52F1127A3E6260099DCE8 /* Assets.xcassets in Resources */,
 				3FEDC104279E935D001828DC /* Main.storyboard in Resources */,
